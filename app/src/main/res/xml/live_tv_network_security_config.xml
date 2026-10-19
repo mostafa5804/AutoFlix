@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
+    <base-config cleartextTrafficPermitted="true" />
     <domain-config cleartextTrafficPermitted="true">
-        <domain>185.9.2.18
-        </domain>
-        <domain includeSubdomains="true">porchooneh.com
-        </domain>
-        <domain includeSubdomains="true">iran620.com
-        </domain>
+        <domain includeSubdomains="true">185.9.2.18</domain>
+        <domain includeSubdomains="true">porchooneh.com</domain>
+        <domain includeSubdomains="true">iran620.com</domain>
     </domain-config>
 </network-security-config>
