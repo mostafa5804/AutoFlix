@@ -1,4 +1,4 @@
-# AutoFlix (v0.6.0) — Android & Android Auto Live TV & Web Player
+# AutoFlix — Android & Android Auto Live TV & Web Player
 
 اپلیکیشن مالتی‌مدیا، پخش زنده شبکه‌های تلویزیونی و مرورگر وب با پشتیبانی کامل از **Android Auto Projection** (نمایش تصویر و رابط کاربری اختصاصی روی مانیتور خودرو).
 
