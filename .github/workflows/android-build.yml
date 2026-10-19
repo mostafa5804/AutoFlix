@@ -1,9 +1,11 @@
-name: Android CI Build (APK)
+name: Android CI Build & Release APK
 
 on:
   push:
     branches: [ "main", "master" ]
-    tags: [ "v*" ]
+    tags: [ "v*", "*.*.*" ]
+  release:
+    types: [ published, created ]
   pull_request:
     branches: [ "main", "master" ]
   workflow_dispatch:
@@ -34,31 +36,49 @@ jobs:
           sed -i 's/\r$//' gradlew
           chmod +x gradlew
 
+      - name: Extract Version Name
+        id: version
+        run: |
+          if [[ "${{ github.event_name }}" == "release" ]]; then
+            TAG="${{ github.event.release.tag_name }}"
+          elif [[ "${{ github.ref }}" == refs/tags/* ]]; then
+            TAG="${GITHUB_REF#refs/tags/}"
+          else
+            TAG="v0.6.0"
+          fi
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+
       - name: Build Debug APK
         run: ./gradlew assembleDebug --no-daemon --stacktrace
 
       - name: Build Release APK (R8 Optimized)
         run: ./gradlew assembleRelease --no-daemon --stacktrace
 
+      - name: Rename APKs with Version Tag
+        run: |
+          cp app/build/outputs/apk/debug/app-debug.apk "AutoFlix-${{ steps.version.outputs.tag }}-debug.apk"
+          cp app/build/outputs/apk/release/app-release.apk "AutoFlix-${{ steps.version.outputs.tag }}-release.apk"
+
       - name: Upload Debug APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: AutoFlix-v0.6.0-debug-apk
-          path: app/build/outputs/apk/debug/app-debug.apk
+          name: AutoFlix-${{ steps.version.outputs.tag }}-debug-apk
+          path: AutoFlix-${{ steps.version.outputs.tag }}-debug.apk
           if-no-files-found: error
 
       - name: Upload Release APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: AutoFlix-v0.6.0-release-apk
-          path: app/build/outputs/apk/release/app-release.apk
+          name: AutoFlix-${{ steps.version.outputs.tag }}-release-apk
+          path: AutoFlix-${{ steps.version.outputs.tag }}-release.apk
           if-no-files-found: error
 
-      - name: Publish GitHub Release (on Tag Push)
-        if: startsWith(github.ref, 'refs/tags/v')
+      - name: Attach APKs to GitHub Release
+        if: startsWith(github.ref, 'refs/tags/') || github.event_name == 'release'
         uses: softprops/action-gh-release@v2
         with:
+          tag_name: ${{ steps.version.outputs.tag }}
           files: |
-            app/build/outputs/apk/debug/app-debug.apk
-            app/build/outputs/apk/release/app-release.apk
+            AutoFlix-${{ steps.version.outputs.tag }}-release.apk
+            AutoFlix-${{ steps.version.outputs.tag }}-debug.apk
           generate_release_notes: true
