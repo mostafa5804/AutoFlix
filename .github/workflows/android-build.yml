@@ -44,7 +44,7 @@ jobs:
           elif [[ "${{ github.ref }}" == refs/tags/* ]]; then
             TAG="${GITHUB_REF#refs/tags/}"
           else
-            TAG="v0.6.0"
+            TAG="latest"
           fi
           echo "tag=$TAG" >> $GITHUB_OUTPUT
 
