@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="abc_action_bar_default_height_material">48dp</dimen>
+    <dimen name="bannerContentWeight">3</dimen>
+    <dimen name="bannerWeightSum">5</dimen>
+    <dimen name="dialogWidthPct">0.85</dimen>
+</resources>

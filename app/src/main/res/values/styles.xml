@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.AutoFlix" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowBackground">#F7FAFA</item>
+        <item name="android:statusBarColor">#00796B</item>
+        <item name="android:navigationBarColor">#F7FAFA</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+</resources>

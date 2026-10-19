@@ -1,0 +1,35 @@
+# Built application files
+*.apk
+*.aab
+*.ap_
+*.dex
+
+# Files for the ART/Dalvik VM
+*.class
+
+# Keep required SDK and Gradle Wrapper jars in Git
+!gradle/wrapper/gradle-wrapper.jar
+!app/libs/*.jar
+
+# Generated files
+bin/
+gen/
+out/
+release/
+
+# Gradle files
+.gradle/
+build/
+app/build/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Android Studio / IntelliJ
+*.iml
+.idea/
+.DS_Store
+*.swp
+captures/
+.externalNativeBuild/
+.cxx/

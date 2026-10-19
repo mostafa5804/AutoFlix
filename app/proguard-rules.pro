@@ -1,0 +1,7 @@
+-keep class com.google.android.gms.car.** { *; }
+-keep class com.google.android.apps.auto.sdk.** { *; }
+-keep class android.support.car.** { *; }
+-keep class com.selma.autoflix.shared.** { *; }
+-dontwarn com.google.android.gms.car.**
+-dontwarn com.google.android.apps.auto.sdk.**
+-dontwarn android.support.car.**
